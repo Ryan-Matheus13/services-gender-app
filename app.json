@@ -26,6 +26,12 @@
         "projectId": "227c61e3-0677-4db1-b996-efcaecec7913"
       }
     },
-    "owner": "ryanmath"
+    "owner": "ryanmath",
+    "runtimeVersion": {
+      "policy": "appVersion"
+    },
+    "updates": {
+      "url": "https://u.expo.dev/227c61e3-0677-4db1-b996-efcaecec7913"
+    }
   }
 }
