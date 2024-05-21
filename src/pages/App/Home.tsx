@@ -10,9 +10,8 @@ import {
 } from "react-native";
 import Constants from "expo-constants";
 import { StatusBar } from "expo-status-bar";
-import { useAppSelector } from "../store/hooks/useAppSelector";
-import { useAppDispatch } from "../store/hooks/useAppDispatch";
-import { EnhancedStore } from "@reduxjs/toolkit";
+import { useAppSelector } from "../../store/hooks/useAppSelector";
+import { useAppDispatch } from "../../store/hooks/useAppDispatch";
 
 const windowHeight = Dimensions.get("window").height;
 const navbarHeight = windowHeight - (windowHeight + Constants.statusBarHeight);
@@ -36,7 +35,7 @@ export default function Home({ navigation }: any) {
           padding: 20,
         }}
       >
-        <Text>Aaaa</Text>
+        <Text>aaa</Text>
       </ScrollView>
     </View>
   );
