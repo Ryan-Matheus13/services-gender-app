@@ -35,7 +35,7 @@ export default function Home({ navigation }: any) {
           padding: 20,
         }}
       >
-        <Text>aaa</Text>
+        <Text>Home</Text>
       </ScrollView>
     </View>
   );

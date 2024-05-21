@@ -1,12 +1,11 @@
 import React from "react";
-import { Text, View } from "react-native";
 
 import { createStackNavigator } from "@react-navigation/stack";
-import { Home, Favorites } from "../pages";
+import { Home, Login, Register } from "../pages";
 
 const Stack = createStackNavigator();
 
-export default function Telas(props: unknown) {
+export function App(props: unknown) {
   return (
     <Stack.Navigator
       screenOptions={{
@@ -29,6 +28,35 @@ export default function Telas(props: unknown) {
       initialRouteName="Home"
     >
       <Stack.Screen name="Home" component={Home} />
+    </Stack.Navigator>
+  );
+}
+
+export default function Screens(props: unknown) {
+  return (
+    <Stack.Navigator
+      screenOptions={{
+        headerShown: false,
+        cardStyleInterpolator: ({ current, next, layouts }) => {
+          return {
+            cardStyle: {
+              transform: [
+                {
+                  translateX: current.progress.interpolate({
+                    inputRange: [0, 1],
+                    outputRange: [layouts.screen.width, 0],
+                  }),
+                },
+              ],
+            },
+          };
+        },
+      }}
+      initialRouteName="Login"
+    >
+      <Stack.Screen name="Login" component={Login} />
+      <Stack.Screen name="Register" component={Register} />
+      <Stack.Screen name="App" component={App} />
     </Stack.Navigator>
   );
 }
