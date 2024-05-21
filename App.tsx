@@ -11,7 +11,7 @@ import { Provider } from "react-redux";
 import { PersistGate } from "redux-persist/integration/react";
 
 import { persistor, store } from "./src/store";
-import Telas from "./src/navigation/Screens";
+import Screens from "./src/navigation/Screens";
 
 SplashScreen.preventAutoHideAsync();
 
@@ -62,7 +62,7 @@ export default function App() {
       <Provider store={store}>
         <PersistGate loading={null} persistor={persistor}>
           <NavigationContainer>
-            <Telas />
+            <Screens />
           </NavigationContainer>
         </PersistGate>
       </Provider>
