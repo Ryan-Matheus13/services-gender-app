@@ -2,10 +2,20 @@ import React from "react";
 
 import { createStackNavigator } from "@react-navigation/stack";
 import { Home, Login, Register } from "../pages";
+import Scheduling from "../pages/App/Scheduling";
 
-const Stack = createStackNavigator();
+export type RootStackParamList = {
+  Login: undefined;
+  Register: undefined;
+  App: undefined;
+  Home: undefined;
+  Scheduling: undefined;
+  Profile: { name: string };
+};
 
-export function App(props: unknown) {
+const Stack = createStackNavigator<RootStackParamList>();
+
+export function App() {
   return (
     <Stack.Navigator
       screenOptions={{
@@ -28,11 +38,12 @@ export function App(props: unknown) {
       initialRouteName="Home"
     >
       <Stack.Screen name="Home" component={Home} />
+      <Stack.Screen name="Scheduling" component={Scheduling} />
     </Stack.Navigator>
   );
 }
 
-export default function Screens(props: unknown) {
+export default function Screens() {
   return (
     <Stack.Navigator
       screenOptions={{
@@ -52,7 +63,7 @@ export default function Screens(props: unknown) {
           };
         },
       }}
-      initialRouteName="Login"
+      initialRouteName="App"
     >
       <Stack.Screen name="Login" component={Login} />
       <Stack.Screen name="Register" component={Register} />
