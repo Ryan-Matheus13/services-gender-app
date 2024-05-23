@@ -45,7 +45,7 @@ export function App() {
           };
         },
       }}
-      initialRouteName="SchedulingDoctors"
+      initialRouteName="Home"
     >
       <Stack.Screen name="Home" component={Home} />
       <Stack.Screen name="Scheduling" component={Scheduling} />
@@ -76,7 +76,7 @@ export default function Screens() {
           };
         },
       }}
-      initialRouteName="App"
+      initialRouteName="Login"
     >
       <Stack.Screen name="Login" component={Login} />
       <Stack.Screen name="Register" component={Register} />
