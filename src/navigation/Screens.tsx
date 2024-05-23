@@ -1,8 +1,15 @@
 import React from "react";
 
 import { createStackNavigator } from "@react-navigation/stack";
-import { Home, Login, Register } from "../pages";
-import Scheduling from "../pages/App/Scheduling";
+import {
+  Home,
+  Login,
+  Register,
+  SchedulingClinics,
+  Scheduling,
+  SchedulingDoctors,
+  DoctorDetail,
+} from "../pages";
 
 export type RootStackParamList = {
   Login: undefined;
@@ -10,6 +17,9 @@ export type RootStackParamList = {
   App: undefined;
   Home: undefined;
   Scheduling: undefined;
+  SchedulingDoctors: undefined;
+  SchedulingClinics: undefined;
+  DoctorDetail: undefined;
   Profile: { name: string };
 };
 
@@ -35,10 +45,13 @@ export function App() {
           };
         },
       }}
-      initialRouteName="Home"
+      initialRouteName="SchedulingDoctors"
     >
       <Stack.Screen name="Home" component={Home} />
       <Stack.Screen name="Scheduling" component={Scheduling} />
+      <Stack.Screen name="SchedulingDoctors" component={SchedulingDoctors} />
+      <Stack.Screen name="SchedulingClinics" component={SchedulingClinics} />
+      <Stack.Screen name="DoctorDetail" component={DoctorDetail} />
     </Stack.Navigator>
   );
 }
@@ -63,7 +76,7 @@ export default function Screens() {
           };
         },
       }}
-      initialRouteName="Login"
+      initialRouteName="App"
     >
       <Stack.Screen name="Login" component={Login} />
       <Stack.Screen name="Register" component={Register} />

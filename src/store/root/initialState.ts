@@ -5,4 +5,5 @@ export const rootInitialState: IRootProps = {
   doctorsNearby: [],
   doctors: [],
   clinics: [],
+  specialtys: [],
 };

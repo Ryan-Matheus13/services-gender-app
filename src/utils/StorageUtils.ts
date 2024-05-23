@@ -1,4 +1,5 @@
 type DayInfo = {
+  active: boolean;
   day: number;
   dayName: string;
 };
@@ -32,7 +33,10 @@ class StorageUtils {
       while (date.getMonth() === month % 12) {
         monthDays.push({
           day: date.getDate(),
-          dayName: date.toLocaleString("pt-BR", { weekday: "short" }),
+          dayName: this.capitalize(
+            date.toLocaleString("pt-BR", { weekday: "short" })
+          ).replace(".", ""),
+          active: false,
         });
         date.setDate(date.getDate() + 1);
       }

@@ -49,6 +49,7 @@ export default function Scheduling({ navigation }: Props) {
         <Category
           size="largest"
           label={"Médicos"}
+          onClick={() => navigation.navigate("SchedulingDoctors")}
           Icon={() => (
             <IconStethoscope width={50} height={50} color={"#3097E1"} />
           )}
@@ -56,6 +57,7 @@ export default function Scheduling({ navigation }: Props) {
         <Category
           size="largest"
           label={"Clínicas"}
+          onClick={() => navigation.navigate("SchedulingDoctors")}
           Icon={() => <IconHospital width={50} height={50} color={"#3097E1"} />}
         />
       </ScrollView>

@@ -3,6 +3,12 @@ type IRootProps = {
   doctorsNearby: IDoctorNearby[];
   doctors: IDoctor[];
   clinics: IClinic[];
+  specialtys: ISpecialtys[];
+};
+
+type ISpecialtys = {
+  active: boolean;
+  value: string;
 };
 
 type IDoctorNearby = {
@@ -38,4 +44,4 @@ type IClinic = {
   openingHour: string;
   doctors: number[];
 };
-export type { IRootProps, IDoctorNearby, IDoctor, IClinic };
+export type { IRootProps, IDoctorNearby, IDoctor, IClinic, ISpecialtys };

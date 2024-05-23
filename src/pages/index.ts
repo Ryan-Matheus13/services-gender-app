@@ -1,5 +1,18 @@
-import Home from "./App/Home";
 import Login from "./Authentication/Login";
 import Register from "./Authentication/Register";
 
-export { Home, Login, Register };
+import Home from "./App/Home";
+import Scheduling from "./App/Scheduling";
+import SchedulingDoctors from "./App/SchedulingDoctors";
+import SchedulingClinics from "./App/SchedulingClinics";
+import DoctorDetail from "./App/DoctorDetail";
+
+export {
+  Home,
+  Login,
+  Register,
+  Scheduling,
+  SchedulingDoctors,
+  SchedulingClinics,
+  DoctorDetail,
+};

@@ -1,27 +1,29 @@
 import { View, Text, Image, StyleSheet, TouchableOpacity } from "react-native";
 import React from "react";
 import { IDoctor, IDoctorNearby } from "@/src/store/root/interfaces";
-import IconLocation from "../Icons/IconLocation";
-import IconCalendar from "../Icons/IconCalendar";
-import IconClock from "../Icons/IconClock";
+import IconLocation from "./Icons/IconLocation";
+import IconCalendar from "./Icons/IconCalendar";
+import IconClock from "./Icons/IconClock";
 
 type DoctorCardProps = {
   doctor: IDoctorNearby | any;
   distance: boolean;
   actionButton: boolean;
+  navigation?: any;
 };
 
 export default function DoctorCard({
   doctor,
   distance,
   actionButton,
+  navigation,
 }: DoctorCardProps) {
   return (
     <View style={styles.container}>
       <View style={styles.cardHeader}>
         <Image
           style={styles.image}
-          source={require("../../assets/images/doctors/doctor.png")}
+          source={require("../assets/images/doctors/doctor.png")}
         ></Image>
         <View style={styles.doctorLabel}>
           <Text style={styles.doctorName}>{doctor.doctor.name}</Text>
@@ -54,7 +56,10 @@ export default function DoctorCard({
           </View>
         </View>
         {actionButton && (
-          <TouchableOpacity style={styles.cardAction}>
+          <TouchableOpacity
+            onPress={() => navigation.navigate("DoctorDetail", { doctor })}
+            style={styles.cardAction}
+          >
             <Text style={styles.cardActionText}>Detalhes</Text>
           </TouchableOpacity>
         )}

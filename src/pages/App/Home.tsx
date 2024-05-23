@@ -25,9 +25,15 @@ import {
   handleSetClinics,
   handleSetDoctorNearby,
   handleSetDoctors,
+  handleSetSpecialtys,
 } from "@/src/store/root/actions";
-import { IClinic, IDoctor, IDoctorNearby } from "@/src/store/root/interfaces";
-import DoctorCard from "@/src/components/DoctorCard/DoctorCard";
+import {
+  IClinic,
+  IDoctor,
+  IDoctorNearby,
+  ISpecialtys,
+} from "@/src/store/root/interfaces";
+import DoctorCard from "@/src/components/DoctorCard";
 import MenuGroup from "@/src/components/Menu/MenuGroup";
 
 const windowHeight = Dimensions.get("window").height;
@@ -294,9 +300,63 @@ export default function Home({ navigation }: Props) {
         imageUrl: "../../assets/images/clinics/clinic.png",
       },
     ];
+    const specialtys: ISpecialtys[] = [
+      {
+        active: true,
+        value: "Todos",
+      },
+      {
+        active: false,
+        value: "Cardiologista",
+      },
+      {
+        active: false,
+        value: "Dermatologista",
+      },
+      {
+        active: false,
+        value: "Ortopedista",
+      },
+      {
+        active: false,
+        value: "Pediatra",
+      },
+      {
+        active: false,
+        value: "Neurologista",
+      },
+      {
+        active: false,
+        value: "Endocrinologista",
+      },
+      {
+        active: false,
+        value: "Oftalmologista",
+      },
+      {
+        active: false,
+        value: "Ginecologista",
+      },
+      {
+        active: false,
+        value: "Psiquiatra",
+      },
+      {
+        active: false,
+        value: "Oncologista",
+      },
+    ];
     dispatch(handleSetDoctorNearby(doctorsNearby));
     dispatch(handleSetDoctors(doctors));
     dispatch(handleSetClinics(clinics));
+    dispatch(handleSetSpecialtys(specialtys));
+  };
+
+  const handleFilterList = () => {
+    const filteredRows = rootStore.doctorsNearby.filter((item) =>
+      item.doctor.name.toLowerCase().includes(search.toLowerCase())
+    );
+    return filteredRows;
   };
 
   return (
@@ -320,34 +380,40 @@ export default function Home({ navigation }: Props) {
           multiline={false}
           Icon={() => <IconSearch />}
         />
-        <View style={styles.categoryContainer}>
-          <Category
-            size="normal"
-            label={"Médicos"}
-            Icon={() => (
-              <IconStethoscope width={34} height={34} color={"#fff"} />
-            )}
-          />
-          <Category
-            size="normal"
-            label={"Clínicas"}
-            Icon={() => <IconHospital width={34} height={34} color={"#fff"} />}
-          />
-        </View>
-        <Text style={styles.subTitle}>Médicos por perto</Text>
+        {!search && (
+          <>
+            <View style={styles.categoryContainer}>
+              <Category
+                size="normal"
+                label={"Médicos"}
+                onClick={() => navigation.navigate("SchedulingDoctors")}
+                Icon={() => (
+                  <IconStethoscope width={34} height={34} color={"#fff"} />
+                )}
+              />
+              <Category
+                size="normal"
+                label={"Clínicas"}
+                onClick={() => navigation.navigate("SchedulingDoctors")}
+                Icon={() => (
+                  <IconHospital width={34} height={34} color={"#fff"} />
+                )}
+              />
+            </View>
+            <Text style={styles.subTitle}>Médicos por perto</Text>
+          </>
+        )}
         <View style={styles.doctorsContainer}>
-          {rootStore.doctorsNearby.map(
-            (doctor: IDoctorNearby, index: number) => {
-              return (
-                <DoctorCard
-                  key={index}
-                  doctor={doctor}
-                  distance={true}
-                  actionButton={false}
-                />
-              );
-            }
-          )}
+          {handleFilterList().map((doctor: IDoctorNearby, index: number) => {
+            return (
+              <DoctorCard
+                key={index}
+                doctor={doctor}
+                distance={true}
+                actionButton={false}
+              />
+            );
+          })}
         </View>
       </ScrollView>
       <MenuGroup navigation={navigation} />

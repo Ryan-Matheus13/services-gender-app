@@ -4,20 +4,26 @@ import React, { ComponentType } from "react";
 type CategoryProps = {
   label: string;
   size: string;
+  onClick: () => void;
   Icon: ComponentType;
 };
 
-export default function Category({ label, Icon, size }: CategoryProps) {
+export default function Category({
+  label,
+  Icon,
+  size,
+  onClick,
+}: CategoryProps) {
   return (
     <>
       {size == "normal" && (
-        <TouchableOpacity style={styles.container}>
+        <TouchableOpacity onPress={onClick} style={styles.container}>
           <Icon />
           <Text style={styles.label}>{label}</Text>
         </TouchableOpacity>
       )}
       {size == "largest" && (
-        <TouchableOpacity style={styles.containerXl}>
+        <TouchableOpacity onPress={onClick} style={styles.containerXl}>
           <Icon />
           <Text style={styles.labelXl}>{label}</Text>
         </TouchableOpacity>

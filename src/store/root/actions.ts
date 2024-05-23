@@ -5,4 +5,5 @@ export const {
   handleSetDoctorNearby,
   handleSetClinics,
   handleSetMenu,
+  handleSetSpecialtys,
 } = rootSlice.actions;
