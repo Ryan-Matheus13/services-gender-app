@@ -24,6 +24,8 @@ export default function App() {
       prepare();
     };
 
+    console.log("teste");
+
     async function loadFont() {
       await Font.loadAsync({
         "Outfit-Black": require("./src/assets/fonts/Outfit-Black.ttf"),
