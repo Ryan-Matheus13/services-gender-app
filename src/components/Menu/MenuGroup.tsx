@@ -26,6 +26,8 @@ export default function MenuGroup({ navigation }: MenuGroupProps) {
     navigation.navigate(route);
   };
 
+  console.log(rootStore.menu);
+
   return (
     <View style={styles.container}>
       <MenuButton

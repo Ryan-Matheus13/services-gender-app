@@ -18,6 +18,7 @@ import Category from "@/src/components/Category";
 import IconStethoscope from "@/src/components/Icons/IconStethoscope";
 import IconHospital from "@/src/components/Icons/IconHospital";
 import Header from "@/src/components/Header/Header";
+import NewCalendar from "@/src/components/NewCalendar/Calendar";
 
 const windowHeight = Dimensions.get("window").height;
 const navbarHeight = windowHeight - (windowHeight + Constants.statusBarHeight);
@@ -46,7 +47,7 @@ export default function Scheduling({ navigation }: Props) {
         }}
       >
         <Header logo={true} textLogo={false} perfil={true} userHello={true} />
-        <Category
+        {/* <Category
           size="largest"
           label={"Médicos"}
           onClick={() => navigation.navigate("SchedulingDoctors")}
@@ -59,7 +60,8 @@ export default function Scheduling({ navigation }: Props) {
           label={"Clínicas"}
           onClick={() => navigation.navigate("SchedulingDoctors")}
           Icon={() => <IconHospital width={50} height={50} color={"#3097E1"} />}
-        />
+        /> */}
+        <NewCalendar />
       </ScrollView>
       <MenuGroup navigation={navigation} />
     </View>
