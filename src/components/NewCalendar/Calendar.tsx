@@ -1,8 +1,8 @@
-import React from "react";
 import { Text, View } from "react-native";
 import { Calendar, LocaleConfig } from "react-native-calendars";
-import ArrowBackIosRoundedIcon from "@mui/icons-material/ArrowBackIosRounded";
-import ArrowForwardIosRoundedIcon from "@mui/icons-material/ArrowForwardIosRounded";
+import { LeftArrowIcon } from "../Icons/LeftArrowIcon";
+import { RightArrowIcon } from "../Icons/RightArrowIcon";
+import React from "react";
 import { StyleSheet } from "react-native";
 
 LocaleConfig.locales["pt-br"] = {
@@ -20,7 +20,31 @@ LocaleConfig.locales["pt-br"] = {
     "Novembro",
     "Dezembro",
   ],
-  dayNamesShort: ["Dom", "Seg", "Ter", "Qua", "Qui", "Sex", "Sab"],
+  monthNamesShort: [
+    "Jan",
+    "Fev",
+    "Mar",
+    "Abr",
+    "Mai",
+    "Jun",
+    "Jul",
+    "Ago",
+    "Set",
+    "Out",
+    "Nov",
+    "Dez",
+  ],
+  dayNames: [
+    "Domingo",
+    "Segunda-feira",
+    "Terça-feira",
+    "Quarta-feira",
+    "Quinta-feira",
+    "Sexta-feira",
+    "Sábado",
+  ],
+  dayNamesShort: ["Dom", "Seg", "Ter", "Qua", "Qui", "Sex", "Sáb"],
+  today: "Hoje",
 };
 LocaleConfig.defaultLocale = "pt-br";
 
@@ -36,33 +60,49 @@ export default function NewCalendar() {
       hideExtraDays={true}
       firstDay={1}
       renderArrow={(direction: any) =>
-        direction === "left" ? (
-          <ArrowBackIosRoundedIcon />
-        ) : (
-          <ArrowForwardIosRoundedIcon />
-        )
+        direction === "left" ? <LeftArrowIcon /> : <RightArrowIcon />
       }
       theme={{
-        calendarBackground: "white",
+        backgroundColor: "#ffffff",
+        calendarBackground: "#ffffff",
         textSectionTitleColor: "#b6c1cd",
-        selectedDayBackgroundColor: "#0084ff",
+        textSectionTitleDisabledColor: "#d9e1e8",
+        selectedDayBackgroundColor: "#00adf5",
         selectedDayTextColor: "#ffffff",
-        todayTextColor: "#0084ff",
+        todayTextColor: "#00adf5",
         dayTextColor: "#2d4150",
         textDisabledColor: "#d9e1e8",
-        monthTextColor: "#0084ff",
-        textDayFontFamily: "sans-serif",
-        textMonthFontFamily: "sans-serif-medium",
-        textDayHeaderFontFamily: "sans-serif-medium",
+        dotColor: "#00adf5",
+        selectedDotColor: "#ffffff",
+        arrowColor: "orange",
+        disabledArrowColor: "#d9e1e8",
+        monthTextColor: "blue",
+        indicatorColor: "blue",
+        textDayFontFamily: "monospace",
+        textMonthFontFamily: "monospace",
+        textDayHeaderFontFamily: "monospace",
+        textDayFontWeight: "300",
+        textMonthFontWeight: "bold",
+        textDayHeaderFontWeight: "300",
         textDayFontSize: 16,
-        textMonthFontSize: 20,
-        textDayHeaderFontSize: 12,
+        textMonthFontSize: 16,
+        textDayHeaderFontSize: 16,
       }}
-      renderHeader={(date: any) => {
-        const month = date.toString("MMMM yyyy");
+      renderHeader={(dateIso: any) => {
+        const date = new Date(dateIso);
+
+        const monthYear = date.toLocaleDateString("pt-BR", {
+          month: "long",
+          year: "numeric",
+        });
+
         return (
           <View style={styles.headerContainer}>
-            <Text style={styles.headerText}>{month}</Text>
+            <Text style={styles.headerText}>
+              {monthYear
+                .replace(" de ", " ")
+                .replace(/^\w/, (c) => c.toUpperCase())}
+            </Text>
           </View>
         );
       }}
@@ -71,9 +111,6 @@ export default function NewCalendar() {
 }
 
 const styles = StyleSheet.create({
-  arrowIcon: {
-    color: "#0084ff",
-  },
   headerContainer: {
     flexDirection: "row",
     justifyContent: "center",
