@@ -23,6 +23,7 @@ import IconLock from "@/src/components/Icons/IconLock";
 import TouchableLink from "@/src/components/TouchableLink";
 import { StackNavigationProp } from "@react-navigation/stack";
 import { RootStackParamList } from "@/src/navigation/Screens";
+import Toast from "react-native-toast-message";
 
 const windowHeight = Dimensions.get("window").height;
 const navbarHeight = windowHeight - (windowHeight + Constants.statusBarHeight);
@@ -40,12 +41,24 @@ export default function Login({ navigation }: Props) {
   const [username, setUsername] = useState<string>("");
   const [password, setPassword] = useState<string>("");
 
+  const handleLogin = () => {
+    if (username != "email@teste.com" || password != "1234") {
+      Toast.show({
+        type: "error",
+        text1: "Acesso Negado",
+        text2: "E-mail ou senha incorretos!",
+      });
+      return;
+    }
+    navigation.navigate("App", { screen: "Home" });
+  };
+
   return (
     <KeyboardAvoidingView
       behavior={Platform.OS === "ios" ? "padding" : "height"}
     >
       <View style={styles.container}>
-        <StatusBar style="dark" />
+        {/* <StatusBar style="dark" /> */}
         <ScrollView
           contentContainerStyle={{
             gap: 20,
@@ -61,6 +74,8 @@ export default function Login({ navigation }: Props) {
             textLogo={true}
             perfil={false}
             userHello={false}
+            backButton={false}
+            navigation={navigation}
           />
           <View style={styles.imageContainer}>
             <Image
@@ -99,7 +114,7 @@ export default function Login({ navigation }: Props) {
               bgColor={"#3097E1"}
               textColor={"#fff"}
               borderColor={"#3097E1"}
-              onClick={() => navigation.navigate("App")}
+              onClick={handleLogin}
             />
             <Text
               style={{
@@ -118,7 +133,11 @@ export default function Login({ navigation }: Props) {
               bgColor={"#fff"}
               textColor={"#3097E1"}
               borderColor={"#3097E1"}
-              onClick={() => navigation.navigate("Register")}
+              onClick={() =>
+                navigation.navigate("Register", {
+                  screen: "Register",
+                })
+              }
             />
           </View>
         </ScrollView>
@@ -137,7 +156,6 @@ const styles = StyleSheet.create({
   },
   content: {
     width: "100%",
-    marginTop: Constants.statusBarHeight,
     paddingBottom: navbarHeight + 80,
   },
   imageContainer: {

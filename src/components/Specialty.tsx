@@ -25,9 +25,9 @@ export default function Specialty({ specialtys }: SpecialtyProps) {
         horizontal={true}
         showsHorizontalScrollIndicator={false}
       >
-        {specialtys.map((specialty: ISpecialtys) => {
+        {specialtys.map((specialty: ISpecialtys, index: number) => {
           return (
-            <>
+            <View key={index}>
               {specialty.active && (
                 <TouchableOpacity style={styles.specialtyActive}>
                   <Text style={styles.specialtyActiveText}>
@@ -40,7 +40,7 @@ export default function Specialty({ specialtys }: SpecialtyProps) {
                   <Text style={styles.specialtyText}>{specialty.value}</Text>
                 </TouchableOpacity>
               )}
-            </>
+            </View>
           );
         })}
       </ScrollView>

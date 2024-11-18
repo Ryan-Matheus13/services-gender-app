@@ -23,7 +23,7 @@ export default function MenuGroup({ navigation }: MenuGroupProps) {
 
   const handleClick = (menuIndex: number, route: string) => {
     dispatch(handleSetMenu(menuIndex));
-    navigation.navigate(route);
+    navigation.navigate(route, { screen: route });
   };
 
   return (
@@ -61,7 +61,7 @@ const styles = StyleSheet.create({
     backgroundColor: "#fff",
     flexDirection: "row",
     position: "absolute",
-    bottom: Platform.OS === "ios" ? 0 : navbarHeight + 50,
+    bottom: Platform.OS === "ios" ? 0 : navbarHeight + 20,
     width: "100%",
     height: 70,
     borderTopWidth: 2,

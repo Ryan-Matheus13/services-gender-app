@@ -7,6 +7,11 @@
     "icon": "./src/assets/images/icon.png",
     "scheme": "services-scheduling-app",
     "userInterfaceStyle": "light",
+    "androidStatusBar": {
+      "barStyle": "light-content", // ou "dark-content"
+      "backgroundColor": "#3097E1",
+      "paddingBottom": 0
+    },
     "splash": {
       "image": "./src/assets/images/splash.png",
       "resizeMode": "contain",

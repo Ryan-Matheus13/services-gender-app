@@ -62,6 +62,8 @@ export default function Register({ navigation }: Props) {
             textLogo={true}
             perfil={false}
             userHello={false}
+            navigation={navigation}
+            backButton={false}
           />
           <View style={styles.imageContainer}>
             <Image
@@ -108,7 +110,7 @@ export default function Register({ navigation }: Props) {
               bgColor={"#3097E1"}
               textColor={"#fff"}
               borderColor={"#3097E1"}
-              onClick={() => navigation.navigate("App")}
+              onClick={() => navigation.navigate("App", { screen: "Home" })}
             />
             <Text
               style={{
@@ -127,7 +129,7 @@ export default function Register({ navigation }: Props) {
               bgColor={"#fff"}
               textColor={"#3097E1"}
               borderColor={"#3097E1"}
-              onClick={() => navigation.navigate("Login")}
+              onClick={() => navigation.navigate("Login", { screen: "Login" })}
             />
           </View>
         </ScrollView>

@@ -18,6 +18,8 @@ import Category from "@/src/components/Category";
 import IconStethoscope from "@/src/components/Icons/IconStethoscope";
 import IconHospital from "@/src/components/Icons/IconHospital";
 import Header from "@/src/components/Header/Header";
+import { useAppDispatch } from "@/src/store/hooks/useAppDispatch";
+import { handleSetMenu } from "@/src/store/root/actions";
 
 const windowHeight = Dimensions.get("window").height;
 const navbarHeight = windowHeight - (windowHeight + Constants.statusBarHeight);
@@ -32,9 +34,21 @@ type Props = {
 };
 
 export default function Scheduling({ navigation }: Props) {
+  const dispatch = useAppDispatch();
+
+  useEffect(() => {
+    dispatch(handleSetMenu(2));
+  }, []);
   return (
     <View style={styles.container}>
-      <StatusBar style="dark" />
+      <Header
+        logo={true}
+        textLogo={false}
+        perfil={true}
+        userHello={true}
+        backButton={false}
+        navigation={navigation}
+      />
       <ScrollView
         style={styles.content}
         contentContainerStyle={{
@@ -45,11 +59,14 @@ export default function Scheduling({ navigation }: Props) {
           height: "100%",
         }}
       >
-        <Header logo={true} textLogo={false} perfil={true} userHello={true} />
         <Category
           size="largest"
           label={"Médicos"}
-          onClick={() => navigation.navigate("SchedulingDoctors")}
+          onClick={() =>
+            navigation.navigate("SchedulingDoctors", {
+              screen: "SchedulingDoctors",
+            })
+          }
           Icon={() => (
             <IconStethoscope width={50} height={50} color={"#3097E1"} />
           )}
@@ -57,11 +74,14 @@ export default function Scheduling({ navigation }: Props) {
         <Category
           size="largest"
           label={"Clínicas"}
-          onClick={() => navigation.navigate("SchedulingDoctors")}
+          onClick={() =>
+            navigation.navigate("SchedulingDoctors", {
+              screen: "SchedulingDoctors",
+            })
+          }
           Icon={() => <IconHospital width={50} height={50} color={"#3097E1"} />}
         />
       </ScrollView>
-      <MenuGroup navigation={navigation} />
     </View>
   );
 }

@@ -25,6 +25,7 @@ import {
   handleSetClinics,
   handleSetDoctorNearby,
   handleSetDoctors,
+  handleSetMenu,
   handleSetSpecialtys,
 } from "@/src/store/root/actions";
 import {
@@ -55,6 +56,7 @@ export default function Home({ navigation }: Props) {
   const rootStore = useAppSelector((store) => store.root);
 
   useEffect(() => {
+    dispatch(handleSetMenu(1));
     handleLoadFakeData();
   }, []);
 
@@ -67,18 +69,18 @@ export default function Home({ navigation }: Props) {
           role: "Cardiologista",
         },
         distance: 1.2,
-        imageUrl: "doctor.png",
+        imageUrl: "doctor1",
         openingDate: "Segunda - Quinta",
         openingHour: "13:00 - 19:00",
       },
       {
         id: 1,
         doctor: {
-          name: "Dr. Pedro Santos",
+          name: "Dr. Claudia Silva",
           role: "Ortopedista",
         },
         distance: 1.4,
-        imageUrl: "doctor.png",
+        imageUrl: "doctor2",
         openingDate: "Segunda - Quinta",
         openingHour: "13:00 - 19:00",
       },
@@ -89,7 +91,7 @@ export default function Home({ navigation }: Props) {
           role: "Pediatra",
         },
         distance: 2.3,
-        imageUrl: "doctor.png",
+        imageUrl: "doctor3",
         openingDate: "Segunda - Quinta",
         openingHour: "13:00 - 19:00",
       },
@@ -100,7 +102,7 @@ export default function Home({ navigation }: Props) {
           role: "Oftalmologista",
         },
         distance: 3.0,
-        imageUrl: "doctor.png",
+        imageUrl: "doctor4",
         openingDate: "Segunda - Quinta",
         openingHour: "13:00 - 19:00",
       },
@@ -111,7 +113,7 @@ export default function Home({ navigation }: Props) {
           role: "Psiquiatra",
         },
         distance: 4.7,
-        imageUrl: "doctor.png",
+        imageUrl: "doctor5",
         openingDate: "Segunda - Quinta",
         openingHour: "13:00 - 19:00",
       },
@@ -124,7 +126,7 @@ export default function Home({ navigation }: Props) {
         openingHour: "13:00 - 19:00",
         availableDates: [],
         availableHours: [],
-        imageUrl: "doctor.png",
+        imageUrl: "doctor1",
       },
       {
         id: 1,
@@ -133,7 +135,7 @@ export default function Home({ navigation }: Props) {
         openingHour: "13:00 - 19:00",
         availableDates: [],
         availableHours: [],
-        imageUrl: "doctor.png",
+        imageUrl: "doctor2",
       },
       {
         id: 2,
@@ -142,7 +144,7 @@ export default function Home({ navigation }: Props) {
         openingHour: "13:00 - 19:00",
         availableDates: [],
         availableHours: [],
-        imageUrl: "doctor.png",
+        imageUrl: "doctor3",
       },
       {
         id: 3,
@@ -151,7 +153,7 @@ export default function Home({ navigation }: Props) {
         openingHour: "13:00 - 19:00",
         availableDates: [],
         availableHours: [],
-        imageUrl: "doctor.png",
+        imageUrl: "doctor4",
       },
       {
         id: 4,
@@ -160,7 +162,7 @@ export default function Home({ navigation }: Props) {
         openingHour: "13:00 - 19:00",
         availableDates: [],
         availableHours: [],
-        imageUrl: "doctor.png",
+        imageUrl: "doctor5",
       },
       {
         id: 5,
@@ -169,7 +171,7 @@ export default function Home({ navigation }: Props) {
         openingHour: "13:00 - 19:00",
         availableDates: [],
         availableHours: [],
-        imageUrl: "doctor.png",
+        imageUrl: "doctor5",
       },
       {
         id: 6,
@@ -178,7 +180,7 @@ export default function Home({ navigation }: Props) {
         openingHour: "13:00 - 19:00",
         availableDates: [],
         availableHours: [],
-        imageUrl: "doctor.png",
+        imageUrl: "doctor5",
       },
       {
         id: 7,
@@ -187,7 +189,7 @@ export default function Home({ navigation }: Props) {
         openingHour: "13:00 - 19:00",
         availableDates: [],
         availableHours: [],
-        imageUrl: "doctor.png",
+        imageUrl: "doctor5",
       },
       {
         id: 8,
@@ -196,7 +198,7 @@ export default function Home({ navigation }: Props) {
         openingHour: "13:00 - 19:00",
         availableDates: [],
         availableHours: [],
-        imageUrl: "doctor.png",
+        imageUrl: "doctor5",
       },
       {
         id: 9,
@@ -205,7 +207,7 @@ export default function Home({ navigation }: Props) {
         openingHour: "13:00 - 19:00",
         availableDates: [],
         availableHours: [],
-        imageUrl: "doctor.png",
+        imageUrl: "doctor5",
       },
     ];
     const clinics: IClinic[] = [
@@ -361,7 +363,14 @@ export default function Home({ navigation }: Props) {
 
   return (
     <View style={styles.container}>
-      <StatusBar style="dark" />
+      <Header
+        logo={true}
+        textLogo={false}
+        perfil={true}
+        userHello={true}
+        backButton={false}
+        navigation={navigation}
+      />
       <ScrollView
         style={styles.content}
         contentContainerStyle={{
@@ -371,7 +380,6 @@ export default function Home({ navigation }: Props) {
           paddingBottom: 90,
         }}
       >
-        <Header logo={true} textLogo={false} perfil={true} userHello={true} />
         <Input
           onChangeText={(text: string) => setSearch(text)}
           value={search}
@@ -406,17 +414,18 @@ export default function Home({ navigation }: Props) {
         <View style={styles.doctorsContainer}>
           {handleFilterList().map((doctor: IDoctorNearby, index: number) => {
             return (
-              <DoctorCard
-                key={index}
-                doctor={doctor}
-                distance={true}
-                actionButton={false}
-              />
+              <View key={index}>
+                <DoctorCard
+                  doctor={doctor}
+                  distance={true}
+                  actionButton={false}
+                />
+              </View>
             );
           })}
         </View>
       </ScrollView>
-      <MenuGroup navigation={navigation} />
+      {/* <MenuGroup navigation={navigation} /> */}
     </View>
   );
 }
@@ -432,7 +441,6 @@ const styles = StyleSheet.create({
   },
   content: {
     width: "100%",
-    marginTop: Constants.statusBarHeight,
     paddingBottom: navbarHeight + 60,
   },
   categoryContainer: {

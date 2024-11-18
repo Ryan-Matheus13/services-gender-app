@@ -142,59 +142,66 @@ export default function DoctorDetail({ navigation, route }: Props) {
   };
 
   return (
-    <View style={styles.container}>
-      <StatusBar style="dark" />
-      <View style={styles.header}>
-        <TouchableOpacity
-          onPress={() => navigation.goBack()}
-          style={styles.backButton}
-        >
-          <IconBackArrow />
-          <Text style={styles.backButtonText}>Voltar</Text>
-        </TouchableOpacity>
-      </View>
-      <View style={styles.info}>
-        <DoctorCard doctor={doctor} distance={false} actionButton={false} />
-      </View>
-      <View style={styles.calendarControllContainer}>
-        <SelectMonth
-          months={months}
-          selectedMonth={selectedMonth}
-          menuClick={handleSelectMonth}
+    <>
+      <View style={styles.container}>
+        <Header
+          logo={false}
+          textLogo={false}
+          perfil={false}
+          userHello={false}
+          backButton={true}
+          navigation={navigation}
         />
-        <View style={styles.daysContainer}>
-          <ScrollView
-            style={styles.calendarControll}
-            contentContainerStyle={{
-              gap: 15,
-              alignItems: "center",
-              paddingHorizontal: 20,
-            }}
-            horizontal={true}
-            showsHorizontalScrollIndicator={false}
-          >
-            {handleFilterList().map((day, index) => {
-              return (
-                <DayButton day={day} onClick={() => handleSelectDay(index)} />
-              );
-            })}
-          </ScrollView>
+        <View style={styles.info}>
+          <DoctorCard doctor={doctor} distance={false} actionButton={false} />
         </View>
+        <View style={styles.calendarControllContainer}>
+          <SelectMonth
+            months={months}
+            selectedMonth={selectedMonth}
+            menuClick={handleSelectMonth}
+          />
+          <View style={styles.daysContainer}>
+            <ScrollView
+              style={styles.calendarControll}
+              contentContainerStyle={{
+                gap: 15,
+                alignItems: "center",
+                paddingHorizontal: 20,
+              }}
+              horizontal={true}
+              showsHorizontalScrollIndicator={false}
+            >
+              {handleFilterList().map((day, index) => {
+                return (
+                  <DayButton
+                    key={index}
+                    day={day}
+                    onClick={() => handleSelectDay(index)}
+                  />
+                );
+              })}
+            </ScrollView>
+          </View>
+        </View>
+        <ScrollView
+          style={styles.content}
+          contentContainerStyle={{
+            gap: 10,
+            justifyContent: "space-between",
+            padding: 20,
+            paddingBottom: 80,
+          }}
+        >
+          <Text style={styles.hourText}>Horários</Text>
+          {fakesHours.map((hour: any, index: number) => {
+            return (
+              <HourGroup key={index} hour={hour} navigation={navigation} />
+            );
+          })}
+        </ScrollView>
       </View>
-      <ScrollView
-        style={styles.content}
-        contentContainerStyle={{
-          gap: 10,
-          justifyContent: "space-between",
-          padding: 20,
-        }}
-      >
-        <Text style={styles.hourText}>Horários</Text>
-        {fakesHours.map((hour: any) => {
-          return <HourGroup hour={hour} />;
-        })}
-      </ScrollView>
-    </View>
+    </>
   );
 }
 
@@ -215,22 +222,6 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     gap: 20,
   },
-  backButton: {
-    height: 60,
-    flexDirection: "row",
-    alignItems: "center",
-  },
-  header: {
-    width: "100%",
-    paddingHorizontal: 20,
-    alignItems: "flex-start",
-    marginTop: Constants.statusBarHeight,
-  },
-  backButtonText: {
-    color: "#3097E1",
-    fontSize: 14,
-    fontFamily: "Outfit-Regular",
-  },
   hourText: {
     color: "#999",
     fontSize: 14,
@@ -240,6 +231,7 @@ const styles = StyleSheet.create({
   info: {
     width: "100%",
     paddingHorizontal: 20,
+    marginTop: 20,
   },
   calendarControllContainer: {
     gap: 15,

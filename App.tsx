@@ -12,8 +12,46 @@ import { PersistGate } from "redux-persist/integration/react";
 
 import { persistor, store } from "./src/store";
 import Screens from "./src/navigation/Screens";
+import Toast, {
+  BaseToast,
+  ErrorToast,
+  SuccessToast,
+} from "react-native-toast-message";
 
 SplashScreen.preventAutoHideAsync();
+
+const toastConfig = {
+  success: (props: any) => (
+    <SuccessToast
+      {...props}
+      text1Style={{
+        fontSize: 17,
+        color: "#555",
+      }}
+      text2Style={{
+        fontSize: 15,
+        color: "#555",
+      }}
+    />
+  ),
+  error: (props: any) => (
+    <ErrorToast
+      {...props}
+      style={{
+        backgroundColor: "#fbfbfb",
+        borderColor: "red",
+      }}
+      text1Style={{
+        fontSize: 17,
+        color: "red",
+      }}
+      text2Style={{
+        fontSize: 15,
+        color: "#333",
+      }}
+    />
+  ),
+};
 
 export default function App() {
   const [appIsReady, setAppIsReady] = useState(false);
@@ -63,6 +101,7 @@ export default function App() {
         <PersistGate loading={null} persistor={persistor}>
           <NavigationContainer>
             <Screens />
+            <Toast config={toastConfig} />
           </NavigationContainer>
         </PersistGate>
       </Provider>

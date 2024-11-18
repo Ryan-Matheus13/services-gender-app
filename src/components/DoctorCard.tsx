@@ -4,6 +4,7 @@ import { IDoctor, IDoctorNearby } from "@/src/store/root/interfaces";
 import IconLocation from "./Icons/IconLocation";
 import IconCalendar from "./Icons/IconCalendar";
 import IconClock from "./Icons/IconClock";
+import { doctorImages } from "../utils/DoctorImageMap";
 
 type DoctorCardProps = {
   doctor: IDoctorNearby | any;
@@ -23,7 +24,7 @@ export default function DoctorCard({
       <View style={styles.cardHeader}>
         <Image
           style={styles.image}
-          source={require("../assets/images/doctors/doctor.png")}
+          source={doctorImages[doctor.imageUrl]}
         ></Image>
         <View style={styles.doctorLabel}>
           <Text style={styles.doctorName}>{doctor.doctor.name}</Text>

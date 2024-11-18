@@ -8,9 +8,10 @@ type HourGroupProps = {
     hour: string;
     avaible: boolean;
   };
+  navigation: any;
 };
 
-export default function HourGroup({ hour }: HourGroupProps) {
+export default function HourGroup({ hour, navigation }: HourGroupProps) {
   return (
     <View style={styles.container}>
       <View style={styles.hour}>
@@ -18,7 +19,7 @@ export default function HourGroup({ hour }: HourGroupProps) {
       </View>
       <View style={styles.action}>
         <View style={styles.divisor} />
-        {hour.avaible && <TimeReservationButton />}
+        {hour.avaible && <TimeReservationButton navigation={navigation} />}
         {!hour.avaible && <BlockedReservation />}
       </View>
     </View>

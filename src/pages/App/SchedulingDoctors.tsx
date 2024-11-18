@@ -51,7 +51,14 @@ export default function SchedulingDoctors({ navigation }: Props) {
 
   return (
     <View style={styles.container}>
-      <StatusBar style="dark" />
+      <Header
+        logo={false}
+        textLogo={false}
+        perfil={false}
+        userHello={false}
+        backButton={true}
+        navigation={navigation}
+      />
       <View style={styles.searchContainer}>
         <Input
           onChangeText={(text: string) => setSearch(text)}
@@ -75,17 +82,17 @@ export default function SchedulingDoctors({ navigation }: Props) {
       >
         {handleFilterList().map((doctor: IDoctor, index: number) => {
           return (
-            <DoctorCard
-              key={index}
-              doctor={doctor}
-              distance={false}
-              actionButton={true}
-              navigation={navigation}
-            />
+            <View key={index}>
+              <DoctorCard
+                doctor={doctor}
+                distance={false}
+                actionButton={true}
+                navigation={navigation}
+              />
+            </View>
           );
         })}
       </ScrollView>
-      <MenuGroup navigation={navigation} />
     </View>
   );
 }
@@ -101,7 +108,7 @@ const styles = StyleSheet.create({
     gap: 20,
   },
   searchContainer: {
-    marginTop: Constants.statusBarHeight + 20,
+    // marginTop: Constants.statusBarHeight,
     paddingHorizontal: 20,
   },
   content: {
